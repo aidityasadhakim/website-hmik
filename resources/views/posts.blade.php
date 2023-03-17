@@ -1,12 +1,13 @@
 @extends('layouts/main')
 
 @section('container')
+  <div class="container"></div>
   <h1 class="mb-3 text-center">{{ $title }}</h1>
 
   <div class="row justify-content-center mb-3">
     <div class="col-md-6">
       <form action="/posts">
-        @if (request('category'))
+        @if (request('category')) 
           <input type="hidden" name="category" value="{{ request('category') }}">
         @endif
         @if (request('author'))
@@ -48,7 +49,7 @@
             <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $post->category->slug }}" class="text-white text-decoration-none">{{ $post->category->name }}</a></div>
             <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}" class="card-img-top" alt="{{ $post->category->name }}">
             <div class="card-body">
-              <h5 class="card-title">{{ $post->title }}</h5>
+              <h5 class="card-title"> {{ $post->title }}</h5>
               <p>
                 <small class="text-muted">
                   By. <a href="/posts?author={{ $post->author->username }}" class="text-decoration-none">{{ $post->author->name }}</a> {{ $post->created_at->diffForHumans() }}
