@@ -6,6 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+<<<<<<< HEAD
+=======
+        "cviebrock/eloquent-sluggable": "^8.0",
+>>>>>>> af84dcf178f764985ea2117e7f623d334ac25438
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
