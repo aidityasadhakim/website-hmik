@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<h1>Welcome, Sandhika Galih</h1>
-=======
 @extends('dashboard.layout.main')
 
 
@@ -10,4 +7,3 @@
 </div>
 @endsection
 
->>>>>>> af84dcf178f764985ea2117e7f623d334ac25438

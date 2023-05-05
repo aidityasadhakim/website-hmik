@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('dashboard.posts.index', [
@@ -23,11 +18,6 @@ class DashboardPostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('dashboard.posts.create', [
@@ -35,12 +25,6 @@ class DashboardPostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -51,7 +35,7 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
@@ -63,25 +47,13 @@ class DashboardPostController extends Controller
         return redirect('/dashboard/posts')->with('success', 'New post has been added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
-        return view('dashboard.posts.show',[
+        return view('dashboard.posts.show', [
             'post' => $post
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         return view('dashboard.posts.edit', [
@@ -90,13 +62,6 @@ class DashboardPostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $rules = [
@@ -106,14 +71,14 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ];
 
-        if($request->slug != $post->slug){
+        if ($request->slug != $post->slug) {
             $rules['slug'] = 'required|unique:posts';
         }
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')){
-            if($request->oldImage){
+        if ($request->file('image')) {
+            if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('post-images');
@@ -136,7 +101,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->image){
+        if ($post->image) {
             Storage::delete($post->image);
         }
         Post::destroy($post->id);
