@@ -2,20 +2,39 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\Response;
+use Exception;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Helpers\Response;
 use App\Helpers\HttpStatus;
-use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
-class PostController extends Controller
+class PostsController extends Controller
 {
+
+    /**
+     * @OA\Get(
+     *     path="/api/posts",
+     *     tags={"posts"},
+     *     summary="Get All Posts",
+     *     description="This API Retrieves all posts from all users",
+     *     operationId="index",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Posts Retrieved",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No Posts Found",
+     *     )
+     * )
+     */
+
     public function index(Request $request)
     {
-        var_dump(request('category'));
 
         $title = '';
         if (request('category')) {

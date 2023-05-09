@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HMIK OpenAPI",
+        "description": "HMIK OpenAPI for Backend Development",
+        "contact": {
+            "email": "aidityasadhakim250@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get All Posts",
+                "description": "This API Retrieves all posts from all users",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Posts Retrieved"
+                    },
+                    "404": {
+                        "description": "No Posts Found"
+                    }
+                }
+            }
+        },
+        "/": {
+            "get": {
+                "description": "Home page",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    }
+}
