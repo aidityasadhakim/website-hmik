@@ -2,52 +2,64 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Helpers\ApiFormatter;
+use App\Helpers\Response;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\HttpStatus;
+use Exception;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $body = $request->getContent();
-        $title = '';
-
         var_dump(request('category'));
 
-        if (isset($body['category'])) {
+        $title = '';
+        if (request('category')) {
             $category = Category::firstWhere('slug', request('category'));
-            $title = ' in ' . $category->name;
+            if ($category) {
+                $categoryName = $category->name;
+            }
         }
 
-        if (isset($body['author'])) {
+        if (request('author')) {
             $author = User::firstWhere('username', request('author'));
-            $title = ' by ' . $author->name;
+            if ($author) {
+                $authorName = $author->name;
+            }
         }
 
-        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString();
+        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->get();
 
         $data = [
-            "posts" => $posts,
-            "title" => $title
+            "category" => $categoryName ?? null,
+            "count" => $posts->count(),
+            "author" => $authorName ?? null,
+            "posts" => $posts
         ];
 
-        if ($data['posts']) {
-            return ApiFormatter::response(200, "Success", $data);
+        if ($data) {
+            return Response::success($data, "All Post Retrieved", HttpStatus::$OK);
         } else {
-            return ApiFormatter::response(404, "Not Found");
+            return Response::error(HttpStatus::$NOT_FOUND, "No Post Found");
         }
     }
 
-    public function show(Post $post)
+    public function show($slug)
     {
-        return view('post', [
-            "title" => "Single Post",
-            "active" => 'posts',
-            "post" => $post
-        ]);
+        try {
+            $post = Post::where('slug', $slug)->firstOrFail();
+            return Response::success($post, "Post Retrieved", HttpStatus::$OK);
+        } catch (Exception $e) {
+            return Response::error("No Post Found", HttpStatus::$NOT_FOUND);
+        }
+        // return view('post', [
+        //     "title" => "Single Post",
+        //     "active" => 'posts',
+        //     "post" => $post
+        // ]);
     }
 }
