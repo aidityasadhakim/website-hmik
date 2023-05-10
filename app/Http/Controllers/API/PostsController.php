@@ -22,6 +22,24 @@ class PostsController extends Controller
      *     summary="Get All Posts",
      *     description="This API Retrieves all posts from all users",
      *     operationId="index",
+     * @OA\Parameter(
+     *         name="author",
+     *         in="query",
+     *         description="Author to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *  @OA\Parameter(
+     *         name="category",
+     *         in="query",
+     *         description="Category to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Posts Retrieved",
@@ -67,6 +85,32 @@ class PostsController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/posts/{slug}",
+     *     tags={"posts"},
+     *     summary="Get Single Posts",
+     *     description="This API Retrieves single posts",
+     *     operationId="show",
+     * @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug to retrieve",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Posts Retrieved",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No Posts Found",
+     *     )
+     * )
+     */
     public function show($slug)
     {
         try {
