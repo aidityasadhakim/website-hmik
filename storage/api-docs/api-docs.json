@@ -21,6 +21,55 @@
                 "summary": "Get All Posts",
                 "description": "This API Retrieves all posts from all users",
                 "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author to filter by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "Category to filter by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Posts Retrieved"
+                    },
+                    "404": {
+                        "description": "No Posts Found"
+                    }
+                }
+            }
+        },
+        "/api/posts/{slug}": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get Single Posts",
+                "description": "This API Retrieves single posts",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Posts Retrieved"

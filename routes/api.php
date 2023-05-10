@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get("posts", [PostsController::class, "index"]);
-Route::get("posts", [PostsController::class, "index"]);
-Route::get("posts/{slug}", [PostsController::class, "show"]);
+Route::controller(PostsController::class)->group(function () {
+    Route::get("posts", "index");
+    Route::get("posts/{slug}", "show");
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
