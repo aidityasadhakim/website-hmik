@@ -20,7 +20,7 @@ class PostsController extends Controller
      *     path="/api/posts",
      *     tags={"posts"},
      *     summary="Get All Posts",
-     *     description="This API Retrieves all posts from all users",
+     *     description="This API Retrieves all posts from all users, can be filtered by author and category or even both",
      *     operationId="index",
      * @OA\Parameter(
      *         name="author",
@@ -174,7 +174,12 @@ class PostsController extends Controller
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="successful operation",
+     *         description="Post Created",
+     *         @OA\Schema(ref="#/components/schemas/ApiResponse")
+     *     ),
+     * @OA\Response(
+     *         response="400",
+     *         description="Bad Request",
      *         @OA\Schema(ref="#/components/schemas/ApiResponse")
      *     ),
      *      tags={
@@ -273,7 +278,12 @@ class PostsController extends Controller
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="successful operation",
+     *         description="Post Updated",
+     *         @OA\Schema(ref="#/components/schemas/ApiResponse")
+     *     ),
+     * @OA\Response(
+     *         response="400",
+     *         description="Bad Request",
      *         @OA\Schema(ref="#/components/schemas/ApiResponse")
      *     ),
      *      tags={
@@ -303,10 +313,10 @@ class PostsController extends Controller
             if ($updatedPost) {
                 return Response::success($updatedPost, "Post Updated", HttpStatus::$CREATED);
             } else {
-                return Response::error("Post Update Failed", HttpStatus::$EXPECTATION_FAILED);
+                return Response::error("Post Update Failed", HttpStatus::$BAD_REQUEST);
             }
         } catch (Exception $e) {
-            return Response::error($e->getMessage(), HttpStatus::$EXPECTATION_FAILED);
+            return Response::error($e->getMessage(), HttpStatus::$BAD_REQUEST);
         }
     }
 
@@ -329,6 +339,11 @@ class PostsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="successful operation",
+     *         @OA\Schema(ref="#/components/schemas/ApiResponse")
+     *     ),
+     * @OA\Response(
+     *         response="400",
+     *         description="Bad Request",
      *         @OA\Schema(ref="#/components/schemas/ApiResponse")
      *     ),
      *      tags={
