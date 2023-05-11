@@ -221,6 +221,32 @@
                 }
             }
         },
+        "/api/posts/delete/{slug}": {
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Delete a new post",
+                "description": "This API allows you to delete a new post",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/": {
             "get": {
                 "description": "Home page",

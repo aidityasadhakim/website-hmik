@@ -309,4 +309,45 @@ class PostsController extends Controller
             return Response::error($e->getMessage(), HttpStatus::$EXPECTATION_FAILED);
         }
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/posts/delete/{slug}",
+     *     description="This API allows you to delete a new post",
+     *     summary="Delete a new post",
+     *     operationId="destroy",
+     *
+     *  @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         description="Slug to retrieve",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\Schema(ref="#/components/schemas/ApiResponse")
+     *     ),
+     *      tags={
+     *          "posts"
+     *          }
+     * )
+     * */
+
+    public function destroy(Post $post)
+    {
+        try {
+            $destroyedPost = Post::destroy($post->id);
+            if ($destroyedPost) {
+                return Response::success($destroyedPost, "Post Destroyed", HttpStatus::$OK);
+            } else {
+                return Response::error("Post Delete Failed", HttpStatus::$BAD_REQUEST);
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage(), HttpStatus::$BAD_REQUEST);
+        }
+    }
 }
