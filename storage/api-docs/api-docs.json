@@ -19,7 +19,7 @@
                     "posts"
                 ],
                 "summary": "Get All Posts",
-                "description": "This API Retrieves all posts from all users",
+                "description": "This API Retrieves all posts from all users, can be filtered by author and category or even both",
                 "operationId": "index",
                 "parameters": [
                     {
@@ -140,7 +140,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "Post Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }
@@ -216,7 +219,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "Post Updated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }
@@ -243,6 +249,9 @@
                 "responses": {
                     "200": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 }
             }
