@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\ErrorHandler;
+use App\Http\Controllers\API\DepartmentsController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\MembersController;
 use App\Http\Controllers\API\PostsController;
@@ -37,6 +38,11 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::controller(MembersController::class)->group(function () {
     Route::post("members/create", "createMember");
+    Route::get("members/department/{department}", "showMemberByDepartment");
+});
+
+Route::controller(DepartmentsController::class)->group(function () {
+    Route::post("departments/create", "create");
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

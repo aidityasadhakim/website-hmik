@@ -13,15 +13,16 @@ class MembersController extends Controller
 {
     public function createMember(Request $request)
     {
-        # Code ...
-
         try {
             $validatedData = $request->validate([
-                'name' => 'string|required|max:255',
-                'description' => 'string|required|max:255',
-                'department' => 'string|required|max:255',
+                'name' => 'string|required|max:100',
+                'description' => 'string|required|max:80',
+                'department' => 'integer|required',
                 'imgUrl' => 'string|required|max:255',
-                'position' => 'string|required|max:255'
+                'position' => 'string|required|max:80',
+                'linkedin' => 'string|max:255|nullable',
+                'instagram' => 'string|max:255|nullable',
+                'github' => 'string|max:255|nullable',
             ]);
             # code...
             $members = Members::create($validatedData);
@@ -39,9 +40,19 @@ class MembersController extends Controller
         // $post = Post::create($validatedData);
     }
 
-    public function showMembers(Request $request)
+    public function showMemberByDepartment($department)
     {
-        # code...
+        try {
+            $members = Members::where("department", $department)->join("departments", "members.department", "=", "departments.id")->get();
+
+            if ($members) {
+                return Response::success($members, "Members Retrieved", HttpStatus::$CREATED);
+            } else {
+                throw new Exception("Members Not Found");
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage(), HttpStatus::$NOT_ACCEPTABLE);
+        }
     }
 
     public function updateMember(Request $request)

@@ -15,11 +15,14 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description');
-            $table->string('department');
+            $table->integer('department');
             $table->string('imgUrl');
             $table->string('position');
+            $table->string("instagram")->nullable();
+            $table->string("gihtub")->nullable();
+            $table->string("linkedin")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
