@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Members;
 use Exception;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MembersController extends Controller
 {
@@ -57,11 +58,39 @@ class MembersController extends Controller
 
     public function updateMember(Request $request)
     {
-        # code...
+        try {
+            $updatedData = $request->validate([
+                'name' => 'string|required|max:100',
+                'description' => 'string|required|max:80',
+                'department' => 'integer|required',
+                'imgUrl' => 'string|required|max:255',
+                'position' => 'string|required|max:80',
+                'linkedin' => 'string|max:255|nullable',
+                'instagram' => 'string|max:255|nullable',
+                'github' => 'string|max:255|nullable',
+            ]);
+            $update = Members::where('id', $request->id)->update($updatedData);
+            if ($update) {
+                return Response::success($update, "Members Updated", HttpStatus::$CREATED);
+            } else {
+                throw new Exception("Members Update Failed");
+            }
+        } catch (Exception $th) {
+            return Response::error($th->getMessage(), HttpStatus::$NOT_ACCEPTABLE);
+        }
     }
 
-    public function deleteMember(Request $request)
+    public function deleteMember($id)
     {
-        # code...
+        try {
+            $delete = Members::where('id', $id)->delete();
+            if ($delete) {
+                return Response::success(null, "Member Deleted Successfully", HttpStatus::$OK);
+            } else {
+                throw new Exception("Member Delete Failed");
+            }
+        } catch (Exception $th) {
+            return Response::error($th->getMessage(), HttpStatus::$NOT_ACCEPTABLE);
+        }
     }
 }

@@ -39,6 +39,8 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(MembersController::class)->group(function () {
     Route::post("members/create", "createMember");
     Route::get("members/department/{department}", "showMemberByDepartment");
+    Route::post("members/delete/{delete}", "deleteMember");
+    Route::post("members/update", "updateMember");
 });
 
 Route::controller(DepartmentsController::class)->group(function () {
