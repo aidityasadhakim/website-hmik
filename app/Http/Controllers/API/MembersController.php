@@ -41,12 +41,41 @@ class MembersController extends Controller
 
     public function showMembers(Request $request)
     {
-        # code...
+        $members = Members::all();
+
+        if($members){
+            return Response::success($members, "Members Retrieved", HttpStatus::$OK);
+        }
+        else {
+            return Response::error("Internal Server Error", HttpStatus::$BAD_REQUEST);
+        }
     }
 
-    public function updateMember(Request $request)
+    public function updateMember(Request $request, $id)
     {
-        # code...
+        try{
+            try{
+                $rules = $request->validate([
+                    'name' => 'string|required|max:255',
+                    'description' => 'string|required|max:255',
+                    'department' => 'string|required|max:255',
+                    'imgUrl' => 'string|required|max:255',
+                    'position' => 'string|required|max:255',
+                    'linkedin' => 'string|max:255|nullable',
+                    'instagram' => 'string|max:255|nullable',
+                    'github' => 'string|max:255|nullable'
+                ]);
+                $member = Members::find($id);
+            }catch(Exception $e){
+                return new Exception($e->getMessage("User Not Found"));
+            }
+            $isUpdate = $member->update($rules);
+        
+            return Response::success($isUpdate,"Member has been updated", HttpStatus::$OK);
+        }catch(Exception $e){
+            return Response::error("Data Fail To Update", HttpStatus::$NOT_FOUND);
+        }
+        
     }
 
     public function deleteMember(Request $request)

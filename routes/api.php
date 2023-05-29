@@ -37,6 +37,8 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::controller(MembersController::class)->group(function () {
     Route::post("members/create", "createMember");
+    Route::get("members/showall", "showMembers");
+    Route::put("members/update/{id}", "updateMember");
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

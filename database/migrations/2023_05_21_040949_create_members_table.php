@@ -23,6 +23,9 @@ class CreateMembersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        
+
     }
 
     /**
