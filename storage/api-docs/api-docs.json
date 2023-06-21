@@ -1,0 +1,270 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HMIK OpenAPI",
+        "description": "HMIK OpenAPI for Backend Development",
+        "contact": {
+            "email": "aidityasadhakim250@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get All Posts",
+                "description": "This API Retrieves all posts from all users, can be filtered by author and category or even both",
+                "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author to filter by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "Category to filter by",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Posts Retrieved"
+                    },
+                    "404": {
+                        "description": "No Posts Found"
+                    }
+                }
+            }
+        },
+        "/api/posts/{slug}": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get Single Posts",
+                "description": "This API Retrieves single posts",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Posts Retrieved"
+                    },
+                    "404": {
+                        "description": "No Posts Found"
+                    }
+                }
+            }
+        },
+        "/api/posts/create": {
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Create a new post",
+                "description": "This API allows you to create a new post",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "slug",
+                                    "body",
+                                    "image",
+                                    "category_id",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Post TItle",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "slug": {
+                                        "description": "Post Slug",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "category_id": {
+                                        "description": "Category ID",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "body": {
+                                        "description": "Body of Post",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "description": "file to upload",
+                                        "type": "file",
+                                        "format": "string"
+                                    },
+                                    "user_id": {
+                                        "description": "User ID",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/posts/update/{slug}": {
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Update a new post",
+                "description": "This API allows you to update a new post",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "slug",
+                                    "body",
+                                    "image",
+                                    "user_id",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Post TItle",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "slug": {
+                                        "description": "Post Slug",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "body": {
+                                        "description": "Body of Post",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "image": {
+                                        "description": "file to upload",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "user_id": {
+                                        "description": "User ID",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "category_id": {
+                                        "description": "Category ID",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post Updated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/posts/delete/{slug}": {
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Delete a new post",
+                "description": "This API allows you to delete a new post",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/": {
+            "get": {
+                "description": "Home page",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    }
+}
