@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get("posts", [PostsController::class, "index"]);
 Route::controller(PostsController::class)->group(function () {
-    Route::get("posts", "index")->middleware('auth:api');
+    Route::get("posts", "index");
     Route::get("posts/{slug}", "show")->middleware('auth:api');
     Route::post("posts/create", "store");
     Route::post("posts/update/{slug}", "update");
@@ -39,6 +39,7 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(MembersController::class)->group(function () {
     Route::post("members/create", "createMember");
     Route::get("members/department/{department}", "showMemberByDepartment");
+    Route::get('members/{name}/{departments}', "showMemberByName");
 });
 
 Route::controller(DepartmentsController::class)->group(function () {

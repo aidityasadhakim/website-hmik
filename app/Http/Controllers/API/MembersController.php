@@ -43,7 +43,10 @@ class MembersController extends Controller
     public function showMemberByDepartment($department)
     {
         try {
-            $members = Members::where("department", $department)->join("departments", "members.department", "=", "departments.id")->get();
+            $members = Members::join("departments", "members.department", "=", "departments.id")
+                ->where("department", $department)
+                ->selectRaw("members.*, departments.name as departmentName")
+                ->get();
 
             if ($members) {
                 return Response::success($members, "Members Retrieved", HttpStatus::$CREATED);
@@ -53,6 +56,11 @@ class MembersController extends Controller
         } catch (Exception $e) {
             return Response::error($e->getMessage(), HttpStatus::$NOT_ACCEPTABLE);
         }
+    }
+
+    public function showMemberByName($name, $departments)
+    {
+        var_dump([$name, $departments]);
     }
 
     public function updateMember(Request $request)

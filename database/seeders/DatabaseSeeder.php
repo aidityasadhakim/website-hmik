@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Departments;
 use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
@@ -49,6 +50,26 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::factory(20)->create();
+
+        Departments::create([
+            "name" => "Internal",
+            "slug" => "internal",
+        ]);
+
+        Departments::create([
+            "name" => "Eksternal",
+            "slug" => "eksternal",
+        ]);
+
+        Departments::create([
+            "name" => "Pendidikan IT",
+            "slug" => "pendidikan-it",
+        ]);
+
+        Departments::create([
+            "name" => "Publikasi dan Dokumentasi",
+            "slug" => "publikasi-dokumentasi",
+        ]);
 
         // Post::create([
         //     'title' => 'Judul Pertama',
