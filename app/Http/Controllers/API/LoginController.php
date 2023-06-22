@@ -6,9 +6,9 @@ use Exception;
 use App\Models\User;
 use App\Helpers\Response;
 use App\Helpers\HttpStatus;
+use Laravel\Passport\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -39,14 +39,9 @@ class LoginController extends Controller
         return back()->with('loginError', 'Login failed!');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
-
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
-
-        return redirect('/');
+        $user_id = auth('api')->user()->token()->revoke();
+        return $user_id; // modify as per your need
     }
 }
