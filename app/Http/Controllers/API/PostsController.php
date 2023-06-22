@@ -92,7 +92,8 @@ class PostsController extends Controller
      *     summary="Get Single Posts",
      *     description="This API Retrieves single posts",
      *     operationId="show",
-     * @OA\Parameter(
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
      *         name="slug",
      *         in="path",
      *         description="Slug to retrieve",

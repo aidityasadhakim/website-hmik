@@ -26,6 +26,14 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="Home page",
  *     @OA\Response(response="default", description="Welcome page")
  * )
+ *  @OA\SecurityScheme(
+ *      securityScheme="bearerAuth",
+ *      in="header",
+ *      name="bearerAuth",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="JWT",
+ * ),
  */
 
 class Controller extends BaseController
