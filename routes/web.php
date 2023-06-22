@@ -26,10 +26,7 @@ use App\Http\Controllers\DashboardPostController;
 
 
 Route::get('/', function () {
-    return view('home', [
-        "title" => "Home",
-        "active" => 'home'
-    ]);
+    return redirect('/api/documentation');
 });
 
 Route::get('/about', function () {
