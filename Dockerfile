@@ -23,8 +23,9 @@ RUN composer install --optimize-autoloader --no-dev \
     && sed -i 's/protected \$proxies/protected \$proxies = "*"/g' app/Http/Middleware/TrustProxies.php \
     && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
     && cp .fly/entrypoint.sh /entrypoint \
-    && chmod +x /entrypoint \
-    && php artisan passport:install \
+    && chmod +x /entrypoint
+
+RUN php artisan passport:install \
     && chmod -R 777 /var/www/html/storage \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 777 /storage \
