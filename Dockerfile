@@ -25,7 +25,7 @@ RUN composer install --optimize-autoloader --no-dev \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-RUN php artisan passport:install \
+RUN php artisan passport:keys \
     && chmod -R 777 /var/www/html/storage \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 777 /storage \
