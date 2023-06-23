@@ -95,35 +95,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "username",
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "description": "Name",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "username": {
-                                        "description": "Username",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "email": {
-                                        "description": "Email",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "password": {
-                                        "description": "Password",
-                                        "type": "string",
-                                        "format": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -501,6 +473,39 @@
                     },
                     "user_id": {
                         "description": "User ID",
+                        "type": "string",
+                        "format": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User schema",
+                "required": [
+                    "name",
+                    "username",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "name",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "username": {
+                        "description": "Username",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "password": {
+                        "description": "Password",
                         "type": "string",
                         "format": "string"
                     }
