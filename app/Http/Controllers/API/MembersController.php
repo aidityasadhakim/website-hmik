@@ -24,57 +24,7 @@ class MembersController extends Controller
      *        required=true,
      *        @OA\MediaType(
      *            mediaType="application/json",
-     *            @OA\Schema(
-     *                @OA\Property(
-     *                    description="name",
-     *                    property="name",
-     *                    type="string",
-     *                    format="Aidityas",
-     *                ),
-     *                @OA\Property(
-     *                    description="Moto Hidup",
-     *                    property="description",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Department HMIK",
-     *                    property="department",
-     *                    type="string",
-     *                    format="1",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to the profile Image",
-     *                    property="imgUrl",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Position in HMIK",
-     *                    property="position",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to LinkedIn Profile",
-     *                    property="linkedin",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to Instagram",
-     *                    property="instagram",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to github",
-     *                    property="github",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                required={"name","description","department","imgUrl","position"}
-     *            )
+     *            @OA\Schema(ref="#/components/schemas/Members"),
      *        ),
      *    ),
      *    @OA\Response(
@@ -94,7 +44,6 @@ class MembersController extends Controller
      */
     public function createMember(Request $request)
     {
-        dd(request('name'));
         try {
             $validatedData = $request->validate([
                 'name' => 'string|required|max:100',
@@ -106,7 +55,7 @@ class MembersController extends Controller
                 'instagram' => 'string|max:255|nullable',
                 'github' => 'string|max:255|nullable',
             ]);
-            # code...
+
             $members = Members::create($validatedData);
 
             if ($members) {
@@ -168,57 +117,7 @@ class MembersController extends Controller
      *        required=true,
      *        @OA\MediaType(
      *            mediaType="application/json",
-     *            @OA\Schema(
-     *                @OA\Property(
-     *                    description="name",
-     *                    property="name",
-     *                    type="string",
-     *                    format="Aidityas",
-     *                ),
-     *                @OA\Property(
-     *                    description="Moto Hidup",
-     *                    property="description",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Department HMIK",
-     *                    property="department",
-     *                    type="string",
-     *                    format="1",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to the profile Image",
-     *                    property="imgUrl",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Position in HMIK",
-     *                    property="position",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to LinkedIn Profile",
-     *                    property="linkedin",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to Instagram",
-     *                    property="instagram",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                @OA\Property(
-     *                    description="Link to github",
-     *                    property="github",
-     *                    type="string",
-     *                    format="string",
-     *                ),
-     *                required={"name","description","department","imgUrl","position"}
-     *            )
+     *            @OA\Schema(ref="#/components/schemas/Members"),
      *        ),
      *    ),
      *    @OA\Response(

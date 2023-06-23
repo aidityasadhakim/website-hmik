@@ -152,56 +152,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "description",
-                                    "department",
-                                    "imgUrl",
-                                    "position"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "description": "name",
-                                        "type": "string",
-                                        "format": "Aidityas"
-                                    },
-                                    "description": {
-                                        "description": "Moto Hidup",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "department": {
-                                        "description": "Department HMIK",
-                                        "type": "string",
-                                        "format": "1"
-                                    },
-                                    "imgUrl": {
-                                        "description": "Link to the profile Image",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "position": {
-                                        "description": "Position in HMIK",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "linkedin": {
-                                        "description": "Link to LinkedIn Profile",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "instagram": {
-                                        "description": "Link to Instagram",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "github": {
-                                        "description": "Link to github",
-                                        "type": "string",
-                                        "format": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Members"
                             }
                         }
                     }
@@ -246,56 +197,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "description",
-                                    "department",
-                                    "imgUrl",
-                                    "position"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "description": "name",
-                                        "type": "string",
-                                        "format": "Aidityas"
-                                    },
-                                    "description": {
-                                        "description": "Moto Hidup",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "department": {
-                                        "description": "Department HMIK",
-                                        "type": "string",
-                                        "format": "1"
-                                    },
-                                    "imgUrl": {
-                                        "description": "Link to the profile Image",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "position": {
-                                        "description": "Position in HMIK",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "linkedin": {
-                                        "description": "Link to LinkedIn Profile",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "instagram": {
-                                        "description": "Link to Instagram",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "github": {
-                                        "description": "Link to github",
-                                        "type": "string",
-                                        "format": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Members"
                             }
                         }
                     }
@@ -575,6 +477,62 @@
         }
     },
     "components": {
+        "schemas": {
+            "Members": {
+                "title": "Action Plan Schema",
+                "description": "Action Plans",
+                "required": [
+                    "name",
+                    "description",
+                    "department",
+                    "imgUrl",
+                    "position"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "name",
+                        "type": "string",
+                        "format": "Aidityas"
+                    },
+                    "description": {
+                        "description": "Moto Hidup",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "department": {
+                        "description": "Department HMIK",
+                        "type": "string",
+                        "format": "1"
+                    },
+                    "imgUrl": {
+                        "description": "Link to the profile Image",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "position": {
+                        "description": "Position in HMIK",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "linkedin": {
+                        "description": "Link to LinkedIn Profile",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "instagram": {
+                        "description": "Link to Instagram",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "github": {
+                        "description": "Link to github",
+                        "type": "string",
+                        "format": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
