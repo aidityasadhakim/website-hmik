@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @OA\Schema(
  *      required={"name","description","department","imgUrl","position"},
- *      description="Action Plans",
- *      title="Action Plan Schema"
+ *      description="Members Schema for the member",
+ *      title="Members"
  * )
  */
 

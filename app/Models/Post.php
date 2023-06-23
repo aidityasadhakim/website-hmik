@@ -6,8 +6,60 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
+/**
+ * 
+ * @OA\Schema(
+ *      title="Post",
+ *      description="Post description for post data",
+ *      required={"title","slug","body","image","category_id","user_id"},
+ * )
+ * 
+ */
+
 class Post extends Model
 {
+
+    /**
+     * 
+     * @OA\Property(
+     *  description="Post TItle",
+     *  property="title",
+     *  type="string",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="Post Slug",
+     *  property="slug",
+     *  type="string",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="Category ID",
+     *  property="category_id",
+     *  type="string",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="Body of Post",
+     *  property="body",
+     *  type="string",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="file to upload",
+     *  property="image",
+     *  type="file",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="User ID",
+     *  property="user_id",
+     *  type="string",
+     *  format="string",
+     * ),
+     * 
+     */
+
     use HasFactory, Sluggable;
 
     // protected $fillable = ['title', 'excerpt', 'body'];

@@ -132,45 +132,7 @@ class PostsController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                     description="Post TItle",
-     *                     property="title",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Post Slug",
-     *                     property="slug",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Category ID",
-     *                     property="category_id",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Body of Post",
-     *                     property="body",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="file to upload",
-     *                     property="image",
-     *                     type="file",
-     *                     format="string",
-     *                 ),@OA\Property(
-     *                     description="User ID",
-     *                     property="user_id",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  
-     *                 required={"title","slug","body","image","category_id","user_id"}
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Post"),
      *         )
      *     ),
      *     @OA\Response(
@@ -226,46 +188,7 @@ class PostsController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                     description="Post TItle",
-     *                     property="title",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Post Slug",
-     *                     property="slug",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Body of Post",
-     *                     property="body",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="file to upload",
-     *                     property="image",
-     *                     type="string",
-     *                     format="string",
-     *                 ),@OA\Property(
-     *                     description="User ID",
-     *                     property="user_id",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     *                  @OA\Property(
-     *                     description="Category ID",
-     *                     property="category_id",
-     *                     type="string",
-     *                     format="string",
-     *                 ),
-     * 
-     *                  
-     *                 required={"title","slug","body","image","user_id","category_id"}
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Post"),
      *         )
      *     ),
      *  @OA\Parameter(
