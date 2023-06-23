@@ -82,8 +82,6 @@ class AuthenticationController extends Controller
         } catch (Exception $e) {
             return Response::error($e->getMessage(), HttpStatus::$BAD_REQUEST);
         }
-
-        return back()->with('loginError', 'Login failed!');
     }
 
     /**
