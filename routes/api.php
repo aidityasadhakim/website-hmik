@@ -1,12 +1,12 @@
 <?php
 
-use App\Helpers\ErrorHandler;
-use App\Http\Controllers\API\DepartmentsController;
-use App\Http\Controllers\API\LoginController;
-use App\Http\Controllers\API\MembersController;
-use App\Http\Controllers\API\PostsController;
 use Illuminate\Http\Request;
+use App\Helpers\ErrorHandler;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\PostsController;
+use App\Http\Controllers\API\MembersController;
+use App\Http\Controllers\API\DepartmentsController;
+use App\Http\Controllers\API\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +32,10 @@ Route::controller(ErrorHandler::class)->group(function () {
     Route::get("/notauthenticated", "notAuthenticated")->name("notauthenticated");
 });
 
-Route::controller(LoginController::class)->group(function () {
+Route::controller(AuthenticationController::class)->group(function () {
     Route::post("/login", "authenticate");
     Route::post("/logout", "logout")->middleware('auth:api');
+    Route::post("/register", "register");
 });
 
 Route::controller(MembersController::class)->group(function () {
