@@ -35,7 +35,7 @@ Route::controller(ErrorHandler::class)->group(function () {
 Route::controller(AuthenticationController::class)->group(function () {
     Route::post("/login", "authenticate");
     Route::post("/logout", "logout")->middleware('auth:api');
-    Route::post("/register", "register");
+    Route::post("/register", "register")->middleware('auth:api');
 });
 
 Route::controller(MembersController::class)->group(function () {

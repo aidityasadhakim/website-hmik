@@ -281,12 +281,7 @@
                     "404": {
                         "description": "No Posts Found"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/posts/create": {
@@ -314,7 +309,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/posts/update/{slug}": {
@@ -353,7 +353,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/posts/delete/{slug}": {
@@ -382,7 +387,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/": {
