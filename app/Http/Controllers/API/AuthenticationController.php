@@ -62,22 +62,26 @@ class AuthenticationController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
 
         try {
-            $user = User::where('email', $credentials['email'])->first();
-            if (!$user) {
-                throw new Exception("User not found", 1);
-            }
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken($user->name)->accessToken;
-                return Response::success([
-                    "user" => $user,
-                    "token" => $token
-                ], "User Logged in successfully", HttpStatus::$OK);
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+            try {
+                $user = User::where('email', $credentials['email'])->first();
+                if (!$user) {
+                    throw new Exception("User not found", 1);
+                }
+                if (Hash::check($request->password, $user->password)) {
+                    $token = $user->createToken($user->name)->accessToken;
+                    return Response::success([
+                        "user" => $user,
+                        "token" => $token
+                    ], "User Logged in successfully", HttpStatus::$OK);
+                }
+            } catch (\Throwable $e) {
+                throw new Exception($e->getMessage());
             }
         } catch (Exception $e) {
             return Response::error($e->getMessage(), HttpStatus::$BAD_REQUEST);
