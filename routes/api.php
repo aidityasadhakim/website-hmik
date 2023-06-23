@@ -22,10 +22,10 @@ use App\Http\Controllers\API\AuthenticationController;
 // Route::get("posts", [PostsController::class, "index"]);
 Route::controller(PostsController::class)->group(function () {
     Route::get("posts", "index");
-    Route::get("posts/{slug}", "show")->middleware('auth:api');
-    Route::post("posts/create", "store");
-    Route::post("posts/update/{slug}", "update");
-    Route::post("posts/delete/{post:slug}", "destroy");
+    Route::get("posts/{slug}", "show");
+    Route::post("posts/create", "store")->middleware('auth:api');
+    Route::post("posts/update/{slug}", "update")->middleware('auth:api');
+    Route::post("posts/delete/{post:slug}", "destroy")->middleware('auth:api');
 });
 
 Route::controller(ErrorHandler::class)->group(function () {
@@ -35,7 +35,7 @@ Route::controller(ErrorHandler::class)->group(function () {
 Route::controller(AuthenticationController::class)->group(function () {
     Route::post("/login", "authenticate");
     Route::post("/logout", "logout")->middleware('auth:api');
-    Route::post("/register", "register");
+    Route::post("/register", "register")->middleware('auth:api');
 });
 
 Route::controller(MembersController::class)->group(function () {

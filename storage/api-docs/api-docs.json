@@ -281,12 +281,7 @@
                     "404": {
                         "description": "No Posts Found"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/posts/create": {
@@ -302,47 +297,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "title",
-                                    "slug",
-                                    "body",
-                                    "image",
-                                    "category_id",
-                                    "user_id"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "description": "Post TItle",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "slug": {
-                                        "description": "Post Slug",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "category_id": {
-                                        "description": "Category ID",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "body": {
-                                        "description": "Body of Post",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "image": {
-                                        "description": "file to upload",
-                                        "type": "file",
-                                        "format": "string"
-                                    },
-                                    "user_id": {
-                                        "description": "User ID",
-                                        "type": "string",
-                                        "format": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Post"
                             }
                         }
                     }
@@ -354,7 +309,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/posts/update/{slug}": {
@@ -381,47 +341,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "title",
-                                    "slug",
-                                    "body",
-                                    "image",
-                                    "user_id",
-                                    "category_id"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "description": "Post TItle",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "slug": {
-                                        "description": "Post Slug",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "body": {
-                                        "description": "Body of Post",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "image": {
-                                        "description": "file to upload",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "user_id": {
-                                        "description": "User ID",
-                                        "type": "string",
-                                        "format": "string"
-                                    },
-                                    "category_id": {
-                                        "description": "Category ID",
-                                        "type": "string",
-                                        "format": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Post"
                             }
                         }
                     }
@@ -433,7 +353,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/posts/delete/{slug}": {
@@ -462,7 +387,12 @@
                     "400": {
                         "description": "Bad Request"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/": {
@@ -479,8 +409,8 @@
     "components": {
         "schemas": {
             "Members": {
-                "title": "Action Plan Schema",
-                "description": "Action Plans",
+                "title": "Members",
+                "description": "Members Schema for the member",
                 "required": [
                     "name",
                     "description",
@@ -526,6 +456,51 @@
                     },
                     "github": {
                         "description": "Link to github",
+                        "type": "string",
+                        "format": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Post": {
+                "title": "Post",
+                "description": "Post description for post data",
+                "required": [
+                    "title",
+                    "slug",
+                    "body",
+                    "image",
+                    "category_id",
+                    "user_id"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Post TItle",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "slug": {
+                        "description": "Post Slug",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "category_id": {
+                        "description": "Category ID",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "body": {
+                        "description": "Body of Post",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "image": {
+                        "description": "file to upload",
+                        "type": "file",
+                        "format": "string"
+                    },
+                    "user_id": {
+                        "description": "User ID",
                         "type": "string",
                         "format": "string"
                     }
