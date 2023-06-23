@@ -42,6 +42,7 @@ Route::controller(MembersController::class)->group(function () {
     Route::post("members/create", "createMember")->middleware('auth:api');
     Route::get("members/department/{department}", "showMemberByDepartment");
     Route::get('members/{name}/{departments}', "showMemberByName");
+    Route::post('members/update/{id}', "updateMember")->middleware('auth:api');
 });
 
 Route::controller(DepartmentsController::class)->group(function () {
