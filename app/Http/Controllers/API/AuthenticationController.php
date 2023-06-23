@@ -135,33 +135,7 @@ class AuthenticationController extends Controller
      *          required=true,
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(
-     *                  @OA\Property(
-     *                      description="Name",
-     *                      property="name",
-     *                      type="string",
-     *                      format="string",
-     *                  ),
-     *                  @OA\Property(
-     *                      description="Username",
-     *                      property="username",
-     *                      type="string",
-     *                      format="string",
-     *                  ),
-     *                  @OA\Property(
-     *                      description="Email",
-     *                      property="email",
-     *                      type="string",
-     *                      format="string",
-     *                  ),
-     *                  @OA\Property(
-     *                      description="Password",
-     *                      property="password",
-     *                      type="string",
-     *                      format="string",
-     *                  ),
-     *                      required={"name","username","email","password"}
-     *              )
+     *              @OA\Schema(ref="#/components/schemas/User")
      *          ),
      *      ),
      *     @OA\Response(
