@@ -138,6 +138,89 @@
                 }
             }
         },
+        "/api/members/create": {
+            "post": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "Create a new member",
+                "description": "This API will create a new member",
+                "operationId": "createMember",
+                "requestBody": {
+                    "description": "Create Member Payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "department",
+                                    "imgUrl",
+                                    "position"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "format": "Aidityas"
+                                    },
+                                    "description": {
+                                        "description": "Moto Hidup",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "department": {
+                                        "description": "Department HMIK",
+                                        "type": "integer",
+                                        "format": "1"
+                                    },
+                                    "imgUrl": {
+                                        "description": "Link to the profile Image",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "position": {
+                                        "description": "Position in HMIK",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "linkedin": {
+                                        "description": "Link to LinkedIn Profile",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "instagram": {
+                                        "description": "Link to Instagram",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "github": {
+                                        "description": "Link to github",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/posts": {
             "get": {
                 "tags": [

@@ -39,13 +39,13 @@ Route::controller(AuthenticationController::class)->group(function () {
 });
 
 Route::controller(MembersController::class)->group(function () {
-    Route::post("members/create", "createMember");
+    Route::post("members/create", "createMember")->middleware('auth:api');
     Route::get("members/department/{department}", "showMemberByDepartment");
     Route::get('members/{name}/{departments}', "showMemberByName");
 });
 
 Route::controller(DepartmentsController::class)->group(function () {
-    Route::post("departments/create", "create");
+    Route::post("departments/create", "create")->middleware('auth:api');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -11,6 +11,87 @@ use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
+    /**
+     * @OA\Post(
+     *    path="/api/members/create",
+     *    description="This API will create a new member",
+     *    summary="Create a new member",
+     *    operationId="createMember",
+     *    security={{"bearerAuth":{}}},
+     *
+     *    @OA\RequestBody(
+     *        description="Create Member Payload",
+     *        required=true,
+     *        @OA\MediaType(
+     *            mediaType="application/json",
+     *            @OA\Schema(
+     *                @OA\Property(
+     *                    description="name",
+     *                    property="name",
+     *                    type="string",
+     *                    format="Aidityas",
+     *                ),
+     *                @OA\Property(
+     *                    description="Moto Hidup",
+     *                    property="description",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                @OA\Property(
+     *                    description="Department HMIK",
+     *                    property="department",
+     *                    type="integer",
+     *                    format="1",
+     *                ),
+     *                @OA\Property(
+     *                    description="Link to the profile Image",
+     *                    property="imgUrl",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                @OA\Property(
+     *                    description="Position in HMIK",
+     *                    property="position",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                @OA\Property(
+     *                    description="Link to LinkedIn Profile",
+     *                    property="linkedin",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                @OA\Property(
+     *                    description="Link to Instagram",
+     *                    property="instagram",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                @OA\Property(
+     *                    description="Link to github",
+     *                    property="github",
+     *                    type="string",
+     *                    format="string",
+     *                ),
+     *                required={"name","description","department","imgUrl","position"}
+     *            )
+     *        ),
+     *    ),
+     *    @OA\Response(
+     *      response="200",
+     *      description="User Created",
+     *      @OA\Schema(ref="#/components/schemas/ApiResponse")    
+     *    ),
+     *    @OA\Response(
+     *      response="400",
+     *      description="Bad Request",
+     *      @OA\Schema(ref="#/components/schemas/ApiResponse")
+     *    ),
+     *    tags={
+     *          "members"
+     *      }
+     *)
+     */
     public function createMember(Request $request)
     {
         try {
