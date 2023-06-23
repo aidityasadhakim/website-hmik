@@ -13,6 +13,210 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Login a user",
+                "description": "This API allows user to login and return a token",
+                "operationId": "authenticate",
+                "requestBody": {
+                    "description": "The login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Logged In"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Logout a user",
+                "description": "This API allows user to logout",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "User Logged Out"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Register a new user",
+                "description": "This API will register a new user",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Register Payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "username",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "username": {
+                                        "description": "Username",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/members/create": {
+            "post": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "Create a new member",
+                "description": "This API will create a new member",
+                "operationId": "createMember",
+                "requestBody": {
+                    "description": "Create Member Payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Members"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/members/update/{id}": {
+            "post": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "Update a member",
+                "description": "This API will update",
+                "operationId": "updateMember",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create Member Payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Members"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Updated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/posts": {
             "get": {
                 "tags": [
@@ -77,7 +281,12 @@
                     "404": {
                         "description": "No Posts Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/posts/create": {
@@ -264,6 +473,73 @@
                         "description": "Welcome page"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Members": {
+                "title": "Action Plan Schema",
+                "description": "Action Plans",
+                "required": [
+                    "name",
+                    "description",
+                    "department",
+                    "imgUrl",
+                    "position"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "name",
+                        "type": "string",
+                        "format": "Aidityas"
+                    },
+                    "description": {
+                        "description": "Moto Hidup",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "department": {
+                        "description": "Department HMIK",
+                        "type": "string",
+                        "format": "1"
+                    },
+                    "imgUrl": {
+                        "description": "Link to the profile Image",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "position": {
+                        "description": "Position in HMIK",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "linkedin": {
+                        "description": "Link to LinkedIn Profile",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "instagram": {
+                        "description": "Link to Instagram",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "github": {
+                        "description": "Link to github",
+                        "type": "string",
+                        "format": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }
