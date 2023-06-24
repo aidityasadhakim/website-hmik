@@ -79,6 +79,8 @@ class AuthenticationController extends Controller
                         "user" => $user,
                         "token" => $token
                     ], "User Logged in successfully", HttpStatus::$OK);
+                } else {
+                    return Response::error("Password is wrong", HttpStatus::$UNAUTHORIZED);
                 }
             } catch (\Throwable $e) {
                 throw new Exception($e->getMessage());
