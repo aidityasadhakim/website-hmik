@@ -11,7 +11,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
  * @OA\Schema(
  *      title="Post",
  *      description="Post description for post data",
- *      required={"title","slug","body","image","category_id","user_id"},
+ *      required={"title","slug","body","image","category_id","user_id", "sub_category_id"},
  * )
  * 
  */
@@ -48,12 +48,18 @@ class Post extends Model
      * @OA\Property(
      *  description="file to upload",
      *  property="image",
-     *  type="file",
+     *  type="string",
      *  format="string",
      * ),
      * @OA\Property(
      *  description="User ID",
      *  property="user_id",
+     *  type="string",
+     *  format="string",
+     * ),
+     * @OA\Property(
+     *  description="Sub Category ID",
+     *  property="sub_category_id",
      *  type="string",
      *  format="string",
      * ),
@@ -79,6 +85,12 @@ class Post extends Model
             });
         });
 
+        $query->when($filters['sub_category'] ?? false, function ($query, $category) {
+            return $query->whereHas('sub_category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+
         $query->when(
             $filters['author'] ?? false,
             fn ($query, $author) =>
@@ -94,6 +106,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subCategories()
+    {
+        return $this->belongsTo(SubCategories::class, 'sub_category_id');
     }
 
     public function author()

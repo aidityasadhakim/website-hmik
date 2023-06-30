@@ -69,7 +69,7 @@ class PostsController extends Controller
             }
         }
 
-        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->get();
+        $posts = Post::with('subCategories')->latest()->filter(request(['search', 'category', 'author', 'sub_category']))->get();
 
         $data = [
             "category" => $categoryName ?? null,
@@ -131,7 +131,7 @@ class PostsController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
+     *             mediaType="application/json",
      *             @OA\Schema(ref="#/components/schemas/Post"),
      *         )
      *     ),
@@ -153,28 +153,33 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'slug' => 'required|unique:posts',
-            'category_id' => 'required',
-            'image' => 'image|file|max:1024',
-            'body' => 'required',
-            'user_id' => 'required'
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'slug' => 'required|unique:posts',
+                'category_id' => 'required',
+                'image' => 'required|max:1024',
+                'body' => 'required',
+                'user_id' => 'required',
+                'sub_category_id' => 'required'
+            ]);
 
-        if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
-        }
+            // $validatedData['user_id'] = auth()->user()->id;
+            $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-        // $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+            $post = Post::create($validatedData);
 
-        $post = Post::create($validatedData);
-
-        if ($post) {
-            return Response::success($post, "Post Created", HttpStatus::$CREATED);
-        } else {
-            return Response::error(HttpStatus::$BAD_REQUEST, "BAD REQUEST");
+            if ($post) {
+                return Response::success($post, "Post Created", HttpStatus::$CREATED);
+            } else {
+                return Response::error("BAD REQUEST", HttpStatus::$BAD_REQUEST);
+            }
+        } catch (\Throwable $e) {
+            if ($e->getCode() != 0) {
+                return Response::error($e->getMessage(), $e->getCode());
+            } else {
+                return Response::error($e->getMessage(), 500);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Departments;
 use App\Models\Post;
+use App\Models\SubCategories;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,18 +36,28 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
 
         Category::create([
+            'name' => 'Competition',
+            'slug' => 'competition'
+        ]);
+
+        Category::create([
+            'name' => 'Event',
+            'slug' => 'event'
+        ]);
+
+        SubCategories::create([
             'name' => 'Web Programming',
             'slug' => 'web-programming'
         ]);
 
-        Category::create([
+        SubCategories::create([
             'name' => 'Web Design',
             'slug' => 'web-design'
         ]);
 
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+        SubCategories::create([
+            'name' => 'Personal Life',
+            'slug' => 'personal-life'
         ]);
 
         Post::factory(20)->create();

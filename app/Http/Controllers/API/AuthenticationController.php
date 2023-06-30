@@ -64,29 +64,38 @@ class AuthenticationController extends Controller
     {
 
         try {
-            $credentials = $request->validate([
-                'email' => 'required|email',
-                'password' => 'required'
-            ]);
+            try {
+                $credentials = $request->validate([
+                    'email' => 'required|email',
+                    'password' => 'required'
+                ]);
+            } catch (\Throwable $e) {
+                throw new Exception($e->getMessage(), HttpStatus::$BAD_REQUEST);
+            }
             try {
                 $user = User::where('email', $credentials['email'])->first();
                 if (!$user) {
-                    throw new Exception("User not found", 1);
+                    throw new Exception("Wrong Email", HttpStatus::$UNAUTHORIZED);
                 }
                 if (Hash::check($request->password, $user->password)) {
                     $token = $user->createToken($user->name)->accessToken;
+
                     return Response::success([
                         "user" => $user,
-                        "token" => $token
-                    ], "User Logged in successfully", HttpStatus::$OK);
+                        "accessToken" => $token
+                    ], "User Logged in successfully", 200);
                 } else {
                     return Response::error("Password is wrong", HttpStatus::$UNAUTHORIZED);
                 }
             } catch (\Throwable $e) {
-                throw new Exception($e->getMessage());
+                if ($e->getCode() != 0) {
+                    throw new Exception($e->getMessage(), $e->getCode());
+                } else {
+                    throw new Exception($e->getMessage(), 500);
+                }
             }
         } catch (Exception $e) {
-            return Response::error($e->getMessage(), HttpStatus::$BAD_REQUEST);
+            return Response::error($e->getMessage(), $e->getCode());
         }
     }
 
