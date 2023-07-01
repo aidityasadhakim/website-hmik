@@ -154,6 +154,10 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         try {
+            $findPost = Post::where('slug', $request->slug)->first();
+            if ($findPost) {
+                throw new Exception("Post is already exist", HttpStatus::$BAD_REQUEST);
+            }
             $validatedData = $request->validate([
                 'title' => 'required|max:255',
                 'slug' => 'required|unique:posts',
