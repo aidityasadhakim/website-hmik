@@ -7,6 +7,7 @@ use App\Http\Controllers\API\PostsController;
 use App\Http\Controllers\API\MembersController;
 use App\Http\Controllers\API\DepartmentsController;
 use App\Http\Controllers\API\AuthenticationController;
+use App\Http\Controllers\API\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,11 @@ Route::controller(MembersController::class)->group(function () {
 
 Route::controller(DepartmentsController::class)->group(function () {
     Route::post("departments/create", "create")->middleware('auth:api');
+});
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get("/category", "showAllCategory");
+    Route::get("/subcategory", "showAllSubCategory");
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

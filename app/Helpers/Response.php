@@ -17,7 +17,7 @@ class Response
             "data" => $payload
         ];
 
-        return response()->json($datas);
+        return response($datas, $statusCode);
     }
 
     public static function error($message = null, $statusCode)
@@ -28,6 +28,6 @@ class Response
             "error" => $message
         ];
 
-        return response()->json($datas);
+        return response($datas, $statusCode);
     }
 }
