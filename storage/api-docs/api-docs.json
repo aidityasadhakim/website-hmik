@@ -469,7 +469,7 @@
                     },
                     "image": {
                         "description": "file to upload",
-                        "type": "file",
+                        "type": "string",
                         "format": "string"
                     },
                     "user_id": {

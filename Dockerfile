@@ -28,6 +28,9 @@ RUN composer install --optimize-autoloader --no-dev \
 RUN php artisan passport:keys 
 RUN chmod -R 777 /var/www/html/storage 
 RUN chmod -R 755 /var/www/html/storage 
+RUN apt-get update
+RUN apt-get install -y ca-certificates
+RUN update-ca-certificates
 
 # If we're using Octane...
 RUN if grep -Fq "laravel/octane" /var/www/html/composer.json; then \
